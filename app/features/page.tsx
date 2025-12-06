@@ -438,7 +438,7 @@ export default function FeaturesPage() {
             <p className="text-muted-foreground mb-8">Building the future of AI-powered government auditing</p>
 
             {/* Team Members Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
                   <span className="text-white font-bold text-lg">VP</span>
@@ -468,6 +468,22 @@ export default function FeaturesPage() {
                   <span className="text-white font-bold text-lg">CM</span>
                 </div>
                 <h4 className="font-semibold text-sm mb-1">C R Mohith Reddy</h4>
+                <p className="text-xs text-muted-foreground">Developer</p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">LS</span>
+                </div>
+                <h4 className="font-semibold text-sm mb-1">Liel Stephen</h4>
+                <p className="text-xs text-muted-foreground">Developer</p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">KH</span>
+                </div>
+                <h4 className="font-semibold text-sm mb-1">K Sri Harsha Vardhan</h4>
                 <p className="text-xs text-muted-foreground">Developer</p>
               </div>
             </div>

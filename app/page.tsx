@@ -29,6 +29,9 @@ export default function LandingPage() {
               <Link href="#demo" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Demo
               </Link>
+              <Link href="#team" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Team
+              </Link>
               <ThemeSwitcher />
               <Link href="/dashboard">
                 <Button size="sm" className="holographic-gradient glow-blue">
@@ -316,10 +319,10 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-6 lg:px-8 border-t border-border/50 bg-card/30">
+      <footer id="team" className="py-16 px-6 lg:px-8 border-t border-border/50 bg-card/30">
         <div className="container mx-auto">
           {/* Team Section */}
-          <div className="max-w-4xl mx-auto text-center mb-12">
+          <div className="max-w-6xl mx-auto text-center mb-12">
             <div className="flex items-center justify-center gap-4 mb-6">
               <Image
                 src="/red-dragon-logo.png"
@@ -329,41 +332,76 @@ export default function LandingPage() {
                 className="object-contain"
               />
             </div>
-            <h3 className="text-2xl font-bold mb-2 text-foreground">Made by Team Red-Dragon</h3>
-            <p className="text-muted-foreground mb-8">Building the future of AI-powered government auditing</p>
+            <h3 className="text-3xl font-bold mb-2 text-foreground">Made by Team Red-Dragon</h3>
+            <p className="text-muted-foreground mb-12">Building the future of AI-powered government auditing</p>
 
             {/* Team Members Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">VP</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Team Leader */}
+              <div className="text-center p-6 rounded-xl border border-primary/30 bg-primary/5 backdrop-blur-sm">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-500 via-red-500 to-orange-500 flex items-center justify-center ring-4 ring-primary/20">
+                  <span className="text-white font-bold text-xl">VP</span>
                 </div>
-                <h4 className="font-semibold text-sm mb-1">V C Premchand Yadav</h4>
-                <p className="text-xs text-muted-foreground">Team Lead</p>
+                <h4 className="font-bold text-lg mb-1">V C Premchand Yadav</h4>
+                <p className="text-sm font-semibold text-primary mb-2">Team Leader & Chief Developer</p>
+                <p className="text-xs text-muted-foreground">
+                  Project architecture, AI integration, and full-stack development
+                </p>
               </div>
 
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">PR</span>
+              <div className="text-center p-6 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">PR</span>
                 </div>
-                <h4 className="font-semibold text-sm mb-1">P R Kiran Kumar Reddy</h4>
-                <p className="text-xs text-muted-foreground">Developer</p>
+                <h4 className="font-bold text-lg mb-1">P R Kiran Kumar Reddy</h4>
+                <p className="text-sm font-semibold text-foreground mb-2">Backend Developer</p>
+                <p className="text-xs text-muted-foreground">
+                  Database design, API development, and security implementation
+                </p>
               </div>
 
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">ES</span>
+              <div className="text-center p-6 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">ES</span>
                 </div>
-                <h4 className="font-semibold text-sm mb-1">Edupulapati Sai Praneeth</h4>
-                <p className="text-xs text-muted-foreground">Developer</p>
+                <h4 className="font-bold text-lg mb-1">Edupulapati Sai Praneeth</h4>
+                <p className="text-sm font-semibold text-foreground mb-2">Frontend Developer</p>
+                <p className="text-xs text-muted-foreground">
+                  UI/UX design, dashboard components, and responsive layouts
+                </p>
               </div>
 
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">CM</span>
+              <div className="text-center p-6 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">CM</span>
                 </div>
-                <h4 className="font-semibold text-sm mb-1">C R Mohith Reddy</h4>
-                <p className="text-xs text-muted-foreground">Developer</p>
+                <h4 className="font-bold text-lg mb-1">C R Mohith Reddy</h4>
+                <p className="text-sm font-semibold text-foreground mb-2">AI/ML Engineer</p>
+                <p className="text-xs text-muted-foreground">
+                  Fraud detection models, document analysis, and predictive algorithms
+                </p>
+              </div>
+
+              <div className="text-center p-6 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">LS</span>
+                </div>
+                <h4 className="font-bold text-lg mb-1">Liel Stephen</h4>
+                <p className="text-sm font-semibold text-foreground mb-2">Data Analyst</p>
+                <p className="text-xs text-muted-foreground">
+                  Analytics dashboards, data visualization, and reporting systems
+                </p>
+              </div>
+
+              <div className="text-center p-6 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">KH</span>
+                </div>
+                <h4 className="font-bold text-lg mb-1">K Sri Harsha Vardhan</h4>
+                <p className="text-sm font-semibold text-foreground mb-2">QA Engineer</p>
+                <p className="text-xs text-muted-foreground">
+                  Testing, quality assurance, and performance optimization
+                </p>
               </div>
             </div>
           </div>

@@ -27,6 +27,14 @@ import {
   Clock,
   Tags,
   MapPin,
+  Shield,
+  FileUp,
+  Brain,
+  Layout,
+  FileText,
+  Package,
+  Palette,
+  Target,
 } from "lucide-react"
 import { ThemeSwitcher } from "@/components/theme-switcher"
 import Image from "next/image"
@@ -51,6 +59,11 @@ const navItems = [
     title: "AI Copilot",
     href: "/dashboard/ai-copilot",
     icon: Sparkles,
+  },
+  {
+    title: "Smart Search",
+    href: "/dashboard/smart-search",
+    icon: Brain,
   },
   {
     title: "Batch Analysis",
@@ -83,6 +96,11 @@ const navItems = [
     icon: Upload,
   },
   {
+    title: "Import Data",
+    href: "/dashboard/import",
+    icon: FileUp,
+  },
+  {
     title: "Advanced Search",
     href: "/dashboard/search",
     icon: Search,
@@ -111,6 +129,11 @@ const navItems = [
     title: "Fraud & Anomalies",
     href: "/dashboard/fraud",
     icon: AlertTriangle,
+  },
+  {
+    title: "Fraud Patterns",
+    href: "/dashboard/fraud-patterns",
+    icon: Target,
   },
   {
     title: "Vendor Analytics",
@@ -153,9 +176,34 @@ const navItems = [
     icon: BarChart3,
   },
   {
+    title: "Executive Dashboard",
+    href: "/dashboard/executive",
+    icon: Layout,
+  },
+  {
     title: "Reports",
     href: "/dashboard/reports",
     icon: FileBarChart,
+  },
+  {
+    title: "Report Builder",
+    href: "/dashboard/report-builder",
+    icon: FileText,
+  },
+  {
+    title: "Bulk Operations",
+    href: "/dashboard/bulk-operations",
+    icon: Package,
+  },
+  {
+    title: "Customize Dashboard",
+    href: "/dashboard/customize",
+    icon: Palette,
+  },
+  {
+    title: "MFA Setup",
+    href: "/dashboard/mfa-setup",
+    icon: Shield,
   },
   {
     title: "Settings",
