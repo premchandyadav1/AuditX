@@ -9,7 +9,7 @@
  
 _"Transparency is the currency of trust."_ 
  
-AuditX is a comprehensive, AI-powered platform designed to detect and prevent **fraud, waste, and abuse** in government and enterprise financial operations. 
+AuditX is a comprehensive,ground breaking, AI-powered platform designed to detect and prevent **fraud, waste, and abuse** in government and enterprise financial operations. 
  
 By leveraging **Google Gemini AI**, advanced analytics, and anomaly detection, AuditX ensures **financial integrity, accountability, and transparency**. 
  
