@@ -28,7 +28,7 @@
   --chart-3: oklch(0.65 0.25 195);
   --chart-4: oklch(0.75 0.15 160);
   --chart-5: oklch(0.58 0.22 25);
-  --radius: 0.75rem; /* Preserved from existing */
+  --radius: 0.75rem;
   --sidebar: oklch(0.15 0.025 252);
   --sidebar-foreground: oklch(0.98 0.005 252);
   --sidebar-primary: oklch(0.58 0.18 252);
@@ -425,9 +425,6 @@
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
-  /* shadcn/ui theme variables */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -468,7 +465,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50; /* Added outline-ring/50 from diff */
+    @apply border-border outline-ring/50;
   }
 
   body {
@@ -488,7 +485,7 @@
 @layer utilities {
   .holographic {
     @apply relative overflow-hidden;
-    background: linear-gradient(135deg, hsl(var(--primary-hsl)) 0%, hsl(var(--secondary-hsl)) 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   }
 
   .glass-card {
