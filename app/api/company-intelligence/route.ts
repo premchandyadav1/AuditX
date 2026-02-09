@@ -54,13 +54,20 @@ Format as JSON with sections: companyName, overview, financial_health, reputatio
     let data
     try {
       // Try to extract JSON from markdown code blocks
-      const jsonMatch = text.match(/```json\n([\s\S]*?)\n```/) || text.match(/```\n([\s\S]*?)\n```/)
+      const jsonMatch = text.match(/```json\s*([\s\S]*?)\s*```/) || text.match(/```\s*([\s\S]*?)\s*```/)
       if (jsonMatch) {
-        data = JSON.parse(jsonMatch[1])
+        data = JSON.parse(jsonMatch[1].trim())
       } else {
-        data = JSON.parse(text)
+        // Fallback to searching for the first { and last }
+        const bracketMatch = text.match(/\{[\s\S]*\}/)
+        if (bracketMatch) {
+          data = JSON.parse(bracketMatch[0])
+        } else {
+          data = JSON.parse(text.trim())
+        }
       }
     } catch (e) {
+      console.error("JSON parsing error in Company Intelligence:", e)
       // If parsing fails, return the raw text
       data = {
         companyName,

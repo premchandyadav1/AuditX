@@ -29,34 +29,9 @@ const navItems = [
     icon: Sparkles,
   },
   {
-    title: "Smart Search",
+    title: "Intelligent Search",
     href: "/dashboard/smart-search",
     icon: Brain,
-  },
-  {
-    title: "Batch Analysis",
-    href: "/dashboard/batch-analyze",
-    icon: Layers,
-  },
-  {
-    title: "Contract Validation",
-    href: "/dashboard/contract-validation",
-    icon: FileCheck,
-  },
-  {
-    title: "Policy Q&A",
-    href: "/dashboard/policy-qa",
-    icon: HelpCircle,
-  },
-  {
-    title: "Predictive Analytics",
-    href: "/dashboard/predictive",
-    icon: TrendingUp,
-  },
-  {
-    title: "Compare Documents",
-    href: "/dashboard/compare",
-    icon: FileCompare,
   },
   {
     title: "Document Upload",
@@ -64,29 +39,14 @@ const navItems = [
     icon: Upload,
   },
   {
-    title: "Import Data",
-    href: "/dashboard/import",
-    icon: FileUp,
+    title: "Contract Validation",
+    href: "/dashboard/contract-validation",
+    icon: FileCheck,
   },
   {
-    title: "Advanced Search",
-    href: "/dashboard/search",
-    icon: Search,
-  },
-  {
-    title: "Bookmarks",
-    href: "/dashboard/bookmarks",
-    icon: Bookmark,
-  },
-  {
-    title: "Activity Timeline",
-    href: "/dashboard/activity",
-    icon: Clock,
-  },
-  {
-    title: "Tags Manager",
-    href: "/dashboard/tags",
-    icon: Tags,
+    title: "Predictive Analytics",
+    href: "/dashboard/predictive",
+    icon: TrendingUp,
   },
   {
     title: "Transactions",
@@ -94,14 +54,9 @@ const navItems = [
     icon: Receipt,
   },
   {
-    title: "Fraud & Anomalies",
+    title: "Fraud Intelligence",
     href: "/dashboard/fraud",
     icon: AlertTriangle,
-  },
-  {
-    title: "Fraud Patterns",
-    href: "/dashboard/fraud-patterns",
-    icon: Target,
   },
   {
     title: "Vendor Analytics",
@@ -109,109 +64,24 @@ const navItems = [
     icon: Network,
   },
   {
-    title: "Department Benchmarking",
-    href: "/dashboard/benchmarking",
-    icon: BarChart3,
-  },
-  {
-    title: "Risk Heatmap",
-    href: "/dashboard/heatmap",
-    icon: MapPin,
-  },
-  {
-    title: "Network Graph",
-    href: "/dashboard/network-graph",
-    icon: Network,
-  },
-  {
-    title: "Policy Compliance",
+    title: "Policy & Compliance",
     href: "/dashboard/compliance",
     icon: BookCheck,
   },
   {
-    title: "Cases",
+    title: "Case Management",
     href: "/dashboard/cases",
     icon: FolderOpen,
+  },
+  {
+    title: "Audit Reports",
+    href: "/dashboard/reports",
+    icon: FileBarChart,
   },
   {
     title: "Alerts",
     href: "/dashboard/alerts",
     icon: Bell,
-  },
-  {
-    title: "Analytics",
-    href: "/dashboard/analytics",
-    icon: BarChart3,
-  },
-  {
-    title: "Executive Dashboard",
-    href: "/dashboard/executive",
-    icon: Layout,
-  },
-  {
-    title: "Reports",
-    href: "/dashboard/reports",
-    icon: FileBarChart,
-  },
-  {
-    title: "Report Builder",
-    href: "/dashboard/report-builder",
-    icon: FileText,
-  },
-  {
-    title: "Bulk Operations",
-    href: "/dashboard/bulk-operations",
-    icon: Package,
-  },
-  {
-    title: "Collaboration Live",
-    href: "/dashboard/collaboration-live",
-    icon: Users,
-  },
-  {
-    title: "Anomaly Detection",
-    href: "/dashboard/anomaly-detection",
-    icon: AlertTriangle,
-  },
-  {
-    title: "Regulatory Compliance",
-    href: "/dashboard/regulatory-compliance",
-    icon: Shield,
-  },
-  {
-    title: "Case Management",
-    href: "/dashboard/case-management",
-    icon: FileText,
-  },
-  {
-    title: "Vendor Intelligence",
-    href: "/dashboard/vendor-intelligence",
-    icon: Brain,
-  },
-  {
-    title: "Budget Variance",
-    href: "/dashboard/budget-variance",
-    icon: TrendingUp,
-  },
-  {
-    title: "Auto Reports",
-    href: "/dashboard/auto-reports",
-    icon: FileBarChart,
-  },
-  {
-    title: "NLP Search",
-    href: "/dashboard/nlp-search",
-    icon: Brain,
-  },
-  {
-    title: "Customize Dashboard",
-    href: "/dashboard/customize",
-    icon: Palette,
-  },
-  {
-    title: "MFA Setup",
-    href: "/dashboard/mfa-setup",
-    icon: Shield,
   },
   {
     title: "Settings",
