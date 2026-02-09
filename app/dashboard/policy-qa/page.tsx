@@ -1,15 +1,12 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Upload, HelpCircle, Send, FileText } from "lucide-react"
-import { GoogleGenerativeAI } from "@google/generative-ai"
-
-const genAI = new GoogleGenerativeAI("AIzaSyBZP3AK10xyB7jW6vbBwZs4UBh-VUqpmoQ")
+import model from "@/path/to/model" // Declare the model variable here
 
 export default function PolicyQAPage() {
   const [policyFile, setPolicyFile] = useState<File | null>(null)
@@ -31,8 +28,6 @@ export default function PolicyQAPage() {
     setQuestion("")
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" })
-
       const fileData = await fileToBase64(policyFile)
 
       const prompt = `You are a policy expert analyzing government procurement policies.

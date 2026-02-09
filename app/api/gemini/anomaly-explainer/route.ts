@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { GoogleGenerativeAI } from "@google/generative-ai"
-
-const genAI = new GoogleGenerativeAI("AIzaSyBZP3AK10xyB7jW6vbBwZs4UBh-VUqpmoQ")
+import { generateText } from "ai"
+import { groq } from "@ai-sdk/groq"
+import { model } from "path/to/model" // Declare the model variable
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,8 +10,6 @@ export async function POST(req: NextRequest) {
     if (!transactionData) {
       return NextResponse.json({ error: "Transaction data required" }, { status: 400 })
     }
-
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" })
 
     const prompt = `You are a fraud detection AI expert. Explain WHY this transaction is suspicious.
 
