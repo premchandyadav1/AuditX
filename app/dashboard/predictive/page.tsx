@@ -253,7 +253,7 @@ export default function PredictiveAnalyticsPage() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Card>
           </div>
         )}
       </div>
