@@ -209,7 +209,7 @@ export default function ReportsPage() {
         <div className="max-w-7xl mx-auto space-y-8">
           <div>
             <h1 className="text-3xl font-bold text-foreground mb-2">AI-Powered Reports</h1>
-            <p className="text-muted-foreground">Generate comprehensive audit reports with Google Gemini AI</p>
+            <p className="text-muted-foreground">Generate comprehensive audit reports with Groq AI</p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">

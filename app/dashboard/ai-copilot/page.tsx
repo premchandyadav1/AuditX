@@ -34,7 +34,7 @@ export default function AICopilotPage() {
     {
       role: "assistant",
       content:
-        "Hello! I'm AuditX AI Copilot powered by Google Gemini. I can analyze your audit data, detect fraud patterns, assess vendor risks, and answer questions about transactions, compliance, and spending. How can I assist you today?",
+        "Hello! I'm AuditX AI Copilot powered by Groq Llama 3.3. I can analyze your audit data, detect fraud patterns, assess vendor risks, and answer questions about transactions, compliance, and spending. How can I assist you today?",
       timestamp: new Date(),
     },
   ])
@@ -108,7 +108,7 @@ export default function AICopilotPage() {
               </div>
               <h1 className="text-3xl font-bold text-foreground">AI Copilot</h1>
             </div>
-            <p className="text-muted-foreground">Powered by Google Gemini Pro • Real-time Data Analysis</p>
+            <p className="text-muted-foreground">Powered by Groq Llama 3.3 • Real-time Data Analysis</p>
           </div>
 
           <div className="grid md:grid-cols-4 gap-4 mb-6">

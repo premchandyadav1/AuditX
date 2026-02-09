@@ -151,7 +151,7 @@ export default function UploadPage() {
         const formData = new FormData()
         formData.append("file", uploadedFile.file)
 
-        console.log("[v0] Sending document to Gemini API:", uploadedFile.name)
+        console.log("[v0] Sending document to Groq API:", uploadedFile.name)
 
         const response = await fetch("/api/ai/analyze-document", {
           method: "POST",
@@ -163,7 +163,7 @@ export default function UploadPage() {
         }
 
         const result = await response.json()
-        console.log("[v0] Gemini analysis successful:", result.data)
+        console.log("[v0] Groq analysis successful:", result.data)
 
         const duplicateResponse = await fetch("/api/ocr/duplicate-detection", {
           method: "POST",
@@ -369,7 +369,7 @@ export default function UploadPage() {
               <div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">Drop files for AI analysis</h3>
                 <p className="text-muted-foreground mb-4">
-                  Supports PDF, JPG, PNG, XLSX • Max 10MB • Powered by Gemini
+                  Supports PDF, JPG, PNG, XLSX • Max 10MB • Powered by Groq
                 </p>
               </div>
               <input
@@ -451,7 +451,7 @@ export default function UploadPage() {
                       {file.status === "processing" && (
                         <div className="flex items-center gap-2 text-sm text-primary">
                           <Loader2 className="w-4 h-4 animate-spin" />
-                          <span>AI analyzing document with Gemini...</span>
+                          <span>AI analyzing document with Groq...</span>
                         </div>
                       )}
 

@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { generateText } from "ai"
 import { model } from "@/lib/ai/model"
-import { simulateOCR } from "@/lib/ai/ocr-utils"
+import { performOCR } from "@/lib/ai/ocr-utils"
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
     }
 
-    const ocrData = simulateOCR(file.name, file.type)
+    const ocrData = await performOCR(file)
 
     // Use Groq for document analysis
     const prompt = `You are an expert fraud auditor for the Government of India. Analyze this financial document.
@@ -20,11 +20,8 @@ export async function POST(req: NextRequest) {
 DOCUMENT METADATA:
 Name: ${ocrData.fileName}
 Type: ${file.type}
-Vendor: ${ocrData.vendorName}
-Amount: ${ocrData.totalAmount}
-Date: ${ocrData.date}
 
-EXTRACTED TEXT:
+EXTRACTED TEXT FROM OCR:
 ${ocrData.extractedText}
 
 Extract the following information in JSON format:
