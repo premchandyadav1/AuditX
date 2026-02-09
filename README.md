@@ -206,7 +206,7 @@ Create a `.env.local` file and add the following variables:
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url 
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key 
  
-# Google Gemini 
+# Google Gemini or you can use any api key of your choice-prefer Gemini or Groq
 GOOGLE_API_KEY=your_gemini_api_key 
  
 # NewsAPI 
