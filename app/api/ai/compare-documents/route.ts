@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { generateText } from "ai"
 import { model } from "@/lib/ai/model"
+import { performOCR } from "@/lib/ai/ocr-utils"
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,11 +13,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Two files required" }, { status: 400 })
     }
 
-    // Convert files to base64
-    const bytes1 = await file1.arrayBuffer()
-    const bytes2 = await file2.arrayBuffer()
-    const buffer1 = Buffer.from(bytes1)
-    const buffer2 = Buffer.from(bytes2)
+    // Perform real OCR on both files
+    const ocr1 = await performOCR(file1)
+    const ocr2 = await performOCR(file2)
 
     const prompt = `You are a forensic document analyst. Compare these two financial documents and identify:
 
@@ -41,7 +40,7 @@ Provide analysis in JSON format:
   "detailedAnalysis": "comprehensive explanation"
 }`
 
-    const docPrompt = `${prompt}\n\nDocument 1 (base64 first 500 chars): ${buffer1.toString("base64").substring(0, 500)}...\nDocument 2 (base64 first 500 chars): ${buffer2.toString("base64").substring(0, 500)}...`
+    const docPrompt = `${prompt}\n\nDOCUMENT 1 TEXT:\n${ocr1.extractedText}\n\nDOCUMENT 2 TEXT:\n${ocr2.extractedText}`
 
     const { text } = await generateText({
       model,

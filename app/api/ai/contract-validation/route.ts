@@ -1,28 +1,29 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { generateText } from "ai"
 import { model } from "@/lib/ai/model"
-import { simulateOCR } from "@/lib/ai/ocr-utils"
+import { performOCR } from "@/lib/ai/ocr-utils"
 
 export async function POST(req: NextRequest) {
   try {
-    const { contractData, invoiceData } = await req.json()
+    const formData = await req.formData()
+    const contractFile = formData.get("contract") as File
+    const invoiceFiles = formData.getAll("invoices") as File[]
 
-    if (!contractData || !invoiceData) {
-      return NextResponse.json({ error: "Both contract and invoice data required" }, { status: 400 })
+    if (!contractFile || invoiceFiles.length === 0) {
+      return NextResponse.json({ error: "Both contract and invoice files are required" }, { status: 400 })
     }
 
-    const contractOCR = simulateOCR(contractData.name, contractData.type)
-    const invoiceOCR = Array.isArray(invoiceData)
-      ? invoiceData.map((inv: any) => simulateOCR(inv.name, inv.type))
-      : [simulateOCR(invoiceData.name, invoiceData.type)]
+    // Perform real OCR
+    const contractOCR = await performOCR(contractFile)
+    const invoicesOCR = await Promise.all(invoiceFiles.map(file => performOCR(file)))
 
-    const prompt = `You are a government audit expert. Compare this contract with the invoice and identify discrepancies.
+    const prompt = `You are a government audit expert. Compare this contract with the invoice(s) and identify discrepancies.
 
-CONTRACT DATA:
-${JSON.stringify(contractOCR, null, 2)}
+CONTRACT TEXT:
+${contractOCR.extractedText}
 
-INVOICE DATA:
-${JSON.stringify(invoiceOCR, null, 2)}
+INVOICE(S) TEXT:
+${invoicesOCR.map((ocr, i) => `INVOICE ${i + 1}:\n${ocr.extractedText}`).join("\n\n")}
 
 Analyze and return JSON with:
 {

@@ -30,17 +30,11 @@ export default function PredictiveAnalyticsPage() {
       const formData = new FormData()
       formData.append("file", budgetFile)
       formData.append("department", "General") // Default department
+      formData.append("historicalSpending", JSON.stringify({}))
 
       const response = await fetch("/api/ai/predictive-analysis", {
         method: "POST",
-        body: JSON.stringify({
-          budgetData: { fileName: budgetFile.name, type: budgetFile.type },
-          department: "General",
-          historicalSpending: {}
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        body: formData,
       })
 
       if (!response.ok) {

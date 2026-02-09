@@ -1,23 +1,26 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { generateText } from "ai"
 import { model } from "@/lib/ai/model"
-import { simulateOCR } from "@/lib/ai/ocr-utils"
+import { performOCR } from "@/lib/ai/ocr-utils"
 
 export async function POST(req: NextRequest) {
   try {
-    const { budgetData, historicalSpending, department } = await req.json()
+    const formData = await req.formData()
+    const budgetFile = formData.get("file") as File
+    const department = formData.get("department") as string || "General"
+    const historicalSpending = formData.get("historicalSpending") as string // JSON string
 
-    if (!budgetData || !department) {
-      return NextResponse.json({ error: "Budget data and department required" }, { status: 400 })
+    if (!budgetFile) {
+      return NextResponse.json({ error: "Budget file required" }, { status: 400 })
     }
 
-    const budgetOCR = simulateOCR(budgetData.fileName || budgetData.name, budgetData.type)
+    const budgetOCR = await performOCR(budgetFile)
 
     const prompt = `You are a financial forecasting AI for government audits. Analyze this department's budget and predict potential issues.
 
 DEPARTMENT: ${department}
-BUDGET DATA:
-${JSON.stringify(budgetOCR, null, 2)}
+BUDGET TEXT FROM OCR:
+${budgetOCR.extractedText}
 
 HISTORICAL SPENDING: ${JSON.stringify(historicalSpending || {}, null, 2)}
 

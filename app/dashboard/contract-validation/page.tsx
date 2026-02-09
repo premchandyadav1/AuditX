@@ -30,17 +30,15 @@ export default function ContractValidationPage() {
 
     setAnalyzing(true)
     try {
-      // In a real app, we'd extract text from these PDFs
-      // For now, we'll send metadata to the API
+      const formData = new FormData()
+      formData.append("contract", contractFile)
+      invoiceFiles.forEach(file => {
+        formData.append("invoices", file)
+      })
+
       const response = await fetch("/api/ai/contract-validation", {
         method: "POST",
-        body: JSON.stringify({
-          contractData: { name: contractFile.name, type: contractFile.type },
-          invoiceData: invoiceFiles.map(f => ({ name: f.name, type: f.type }))
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        body: formData,
       })
 
       if (!response.ok) throw new Error("Validation failed")
