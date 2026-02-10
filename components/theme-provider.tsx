@@ -6,8 +6,10 @@ type Theme =
   | "holographic"
   | "light"
   | "black"
+  | "google"
   | "bharat"
   | "gov"
+  | "tech"
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -48,18 +50,24 @@ export function ThemeProvider({
     root.classList.remove(
       "theme-light",
       "theme-black",
+      "theme-google",
       "theme-bharat",
       "theme-gov",
+      "theme-tech",
     )
 
     if (theme === "light") {
       root.classList.add("theme-light")
     } else if (theme === "black") {
       root.classList.add("theme-black")
+    } else if (theme === "google") {
+      root.classList.add("theme-google")
     } else if (theme === "bharat") {
       root.classList.add("theme-bharat")
     } else if (theme === "gov") {
       root.classList.add("theme-gov")
+    } else if (theme === "tech") {
+      root.classList.add("theme-tech")
     }
     // holographic is the default in :root, so no class needed
 
