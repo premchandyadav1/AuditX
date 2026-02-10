@@ -41,9 +41,10 @@ export function ThemeProvider({
   React.useEffect(() => {
     setMounted(true)
     const stored = localStorage.getItem(storageKey) as Theme | null
-    if (stored) {
+    if (stored && stored !== theme) {
       setTheme(stored)
     }
+    console.log('[v0] Theme provider mounted with theme:', stored || 'holographic')
   }, [storageKey])
 
   React.useEffect(() => {

@@ -3,10 +3,9 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { LayoutDashboard, Upload, AlertTriangle, Receipt, BookCheck, Settings, Search, Bell, FolderOpen, BarChart3, Newspaper, Sparkles, FileCheck, Shield, FileUp, Brain, FileText, ChevronDown } from "lucide-react"
+import { LayoutDashboard, Upload, AlertTriangle, Receipt, BookCheck, Settings, Search, Bell, FolderOpen, BarChart3, Newspaper, Sparkles, FileCheck, Shield, FileUp, Brain, FileText } from "lucide-react"
 import { ThemeSwitcher } from "@/components/theme-switcher"
 import Image from "next/image"
-import { useState } from "react"
 
 interface NavSection {
   title: string
@@ -129,16 +128,15 @@ const navSections: NavSection[] = [
 
 export function DashboardNav() {
   const pathname = usePathname()
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+  // Keep all sections expanded by default to avoid hydration issues
+  const expandedSections: Record<string, boolean> = {
     "Main": true,
     "Intelligence & Analysis": true,
-  })
-
-  const toggleSection = (title: string) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [title]: !prev[title],
-    }))
+    "Document Operations": true,
+    "Compliance & Risk": true,
+    "Analytics & Reporting": true,
+    "Workspace": true,
+    "Settings": false,
   }
 
   return (
@@ -163,22 +161,13 @@ export function DashboardNav() {
               <div key={section.title} className="space-y-1">
                 {/* Section Header */}
                 {section.items.length > 0 && (
-                  <button
-                    onClick={() => toggleSection(section.title)}
-                    className={cn(
-                      "w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold uppercase tracking-wide transition-colors",
-                      "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/50",
-                    )}
-                  >
+                  <div className={cn(
+                    "w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold uppercase tracking-wide",
+                    "text-sidebar-foreground/70",
+                  )}>
                     {section.icon && <section.icon className="w-4 h-4" />}
                     <span className="flex-1 text-left">{section.title}</span>
-                    <ChevronDown
-                      className={cn(
-                        "w-4 h-4 transition-transform",
-                        expandedSections[section.title] ? "rotate-180" : "",
-                      )}
-                    />
-                  </button>
+                  </div>
                 )}
 
                 {/* Section Items */}

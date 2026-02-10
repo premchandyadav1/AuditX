@@ -30,9 +30,10 @@ const DEFAULT_METRICS: DashboardMetrics = {
 
 export function HomeMetrics() {
   const [metrics, setMetrics] = useState<DashboardMetrics>(DEFAULT_METRICS)
-  const [loading, setLoading] = useState(true)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     fetchMetrics()
     // Refresh every 30 seconds
     const interval = setInterval(fetchMetrics, 30000)
@@ -47,21 +48,13 @@ export function HomeMetrics() {
         setMetrics(data)
       }
     } catch (error) {
-      console.log('[v0] Using default metrics')
-      setMetrics(DEFAULT_METRICS)
-    } finally {
-      setLoading(false)
+      // Use default metrics silently
     }
   }
 
-  if (loading) {
-    return (
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 animate-pulse">
-        {[1, 2, 3, 4].map((i) => (
-          <Card key={i} className="p-6 bg-card/50 h-32" />
-        ))}
-      </div>
-    )
+  // Always render metrics, no loading state
+  if (!mounted) {
+    return null
   }
 
   const metricCards = [
