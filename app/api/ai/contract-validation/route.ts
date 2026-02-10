@@ -6,6 +6,13 @@ export async function POST() {
     { status: 503 }
   )
 }
+
+/*
+// Disabled - feature not implemented
+*/
+
+    if (!contractFile || invoiceFiles.length === 0) {
+      return NextResponse.json({ error: "Both contract and invoice files are required" }, { status: 400 })
     }
 
     // Perform real OCR
