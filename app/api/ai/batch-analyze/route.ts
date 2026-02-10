@@ -6,13 +6,6 @@ export async function POST() {
     { status: 503 }
   )
 }
-1. Document type (invoice/receipt/purchase order/contract)
-2. Vendor name and details
-3. Amount and currency
-4. Date
-5. Line items with quantities and prices
-6. Fraud risk score (0-100) with reasoning
-7. Any suspicious indicators
 
 Document data: ${JSON.stringify(doc)}
 

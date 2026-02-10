@@ -6,18 +6,6 @@ export async function POST() {
     { status: 503 }
   )
 }
-import { type NextRequest, NextResponse } from "next/server"
-import { generateText } from "ai"
-import { model } from "@/lib/ai/model"
-import { performOCR } from "@/lib/ai/ocr-utils"
-
-export async function POST(req: NextRequest) {
-  try {
-    const formData = await req.formData()
-    const budgetFile = formData.get("file") as File
-    const department = formData.get("department") as string || "General"
-    const historicalSpending = formData.get("historicalSpending") as string // JSON string
-
     if (!budgetFile) {
       return NextResponse.json({ error: "Budget file required" }, { status: 400 })
     }
