@@ -1,13 +1,15 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { generateText } from "ai"
-import { model } from "@/lib/ai/model"
+import { NextResponse } from "next/server"
 
-export async function POST(req: NextRequest) {
-  try {
-    const { entityA, entityB, comparisonType } = await req.json()
+export async function POST() {
+  return NextResponse.json(
+    { error: "This feature is temporarily unavailable." },
+    { status: 503 }
+  )
+}
 
-    if (!entityA || !entityB || !comparisonType) {
-      return NextResponse.json({ error: "Both entities and comparison type required" }, { status: 400 })
+/*
+// Disabled - feature not implemented
+*/
     }
 
     const prompt = `Compare these two ${comparisonType}s and provide comprehensive analysis.

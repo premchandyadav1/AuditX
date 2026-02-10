@@ -1,20 +1,11 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { generateText } from "ai"
-import { model } from "@/lib/ai/model"
+import { NextResponse } from "next/server"
 
-export async function POST(req: NextRequest) {
-  try {
-    const { documents } = await req.json()
-
-    if (!documents || !Array.isArray(documents) || documents.length === 0) {
-      return NextResponse.json({ error: "Documents array is required" }, { status: 400 })
-    }
-
-    const results = []
-
-    for (const doc of documents) {
-      try {
-        const prompt = `Analyze this financial document and extract:
+export async function POST() {
+  return NextResponse.json(
+    { error: "This feature is temporarily unavailable." },
+    { status: 503 }
+  )
+}
 1. Document type (invoice/receipt/purchase order/contract)
 2. Vendor name and details
 3. Amount and currency

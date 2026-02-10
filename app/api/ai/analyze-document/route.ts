@@ -1,6 +1,4 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { generateText } from "ai"
-import { model } from "@/lib/ai/model"
 import { performOCR } from "@/lib/ai/ocr-utils"
 
 export async function POST(req: NextRequest) {
@@ -14,86 +12,31 @@ export async function POST(req: NextRequest) {
 
     const ocrData = await performOCR(file)
 
-    // Use Groq for document analysis
-    const prompt = `You are an expert fraud auditor for the Government of India. Analyze this financial document.
-
-DOCUMENT METADATA:
-Name: ${ocrData.fileName}
-Type: ${file.type}
-
-EXTRACTED TEXT FROM OCR:
-${ocrData.extractedText}
-
-Extract the following information in JSON format:
-{
-  "documentType": "invoice|receipt|purchase_order|contract|expense_report",
-  "vendor": {
-    "name": "vendor name",
-    "address": "full address",
-    "taxId": "GST/PAN number",
-    "contactInfo": "email or phone"
-  },
-  "financial": {
-    "totalAmount": numeric value,
-    "currency": "INR",
-    "taxAmount": tax amount,
-    "subtotal": subtotal,
-    "paymentTerms": "payment terms"
-  },
-  "documentDetails": {
-    "documentNumber": "invoice/receipt number",
-    "date": "YYYY-MM-DD",
-    "dueDate": "YYYY-MM-DD",
-    "referenceNumber": "PO or reference"
-  },
-  "lineItems": [
-    {
-      "description": "item description",
-      "quantity": number,
-      "unitPrice": number,
-      "amount": number
-    }
-  ],
-  "parties": {
-    "buyer": "government department",
-    "seller": "vendor name",
-    "shippingAddress": "if applicable"
-  },
-  "fraudIndicators": {
-    "duplicateRisk": boolean,
-    "priceAnomalyRisk": boolean,
-    "vendorRisk": boolean,
-    "missingFieldsRisk": boolean,
-    "riskScore": 0-100,
-    "riskReasons": ["reason 1", "reason 2"]
-  },
-  "confidence": 0-100,
-  "additionalNotes": "any suspicious patterns or concerns"
-}
-
-Be thorough and flag any concerns.`
-
-    const { text } = await generateText({
-      model,
-      prompt,
-      temperature: 0.3,
-    })
-
-    // Extract JSON from response
-    const jsonMatch = text.match(/\{[\s\S]*\}/)
-    if (!jsonMatch) {
-      throw new Error("Failed to extract JSON from response")
+    // Perform basic fraud detection on extracted text
+    const extractedText = ocrData.extractedText.toLowerCase()
+    
+    // Simple heuristic fraud detection
+    const fraudIndicators = {
+      duplicateText: (extractedText.match(/duplicate|copy|replica/g) || []).length > 0,
+      suspiciousPatterns: (extractedText.match(/tampered|forged|altered|modified/g) || []).length > 0,
+      missingVendorInfo: extractedText.length < 100 || !extractedText.includes("vendor"),
+      unusualAmounts: extractedText.match(/\d{8,}/g) ? (extractedText.match(/\d{8,}/g) || []).length > 0 : false,
     }
 
-    const extractedData = JSON.parse(jsonMatch[0])
+    const riskScore = Object.values(fraudIndicators).filter(Boolean).length * 25
 
     return NextResponse.json({
       success: true,
-      data: extractedData,
-      rawResponse: text,
+      documentType: "financial_document",
+      extractedText: ocrData.extractedText,
+      fileName: ocrData.fileName,
+      fraudIndicators,
+      riskScore: Math.min(riskScore, 100),
+      confidence: 75,
+      recommendation: riskScore > 50 ? "investigate" : "approve",
     })
   } catch (error) {
-    console.error("AI analysis error:", error)
+    console.error("Document analysis error:", error)
     return NextResponse.json(
       {
         error: "Document analysis failed",

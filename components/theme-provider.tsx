@@ -8,12 +8,8 @@ type Theme =
   | "black"
   | "google"
   | "bharat"
-  | "cyber"
-  | "premium"
   | "gov"
   | "tech"
-  | "legacy"
-  | "vintage"
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -40,15 +36,20 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = React.useState<Theme>(defaultTheme)
+  const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
+    setMounted(true)
     const stored = localStorage.getItem(storageKey) as Theme | null
-    if (stored) {
+    if (stored && stored !== theme) {
       setTheme(stored)
     }
+    console.log('[v0] Theme provider mounted with theme:', stored || 'holographic')
   }, [storageKey])
 
   React.useEffect(() => {
+    if (!mounted) return
+
     const root = window.document.documentElement
 
     root.classList.remove(
@@ -56,12 +57,8 @@ export function ThemeProvider({
       "theme-black",
       "theme-google",
       "theme-bharat",
-      "theme-cyber",
-      "theme-premium",
       "theme-gov",
       "theme-tech",
-      "theme-legacy",
-      "theme-vintage",
     )
 
     if (theme === "light") {
@@ -72,23 +69,15 @@ export function ThemeProvider({
       root.classList.add("theme-google")
     } else if (theme === "bharat") {
       root.classList.add("theme-bharat")
-    } else if (theme === "cyber") {
-      root.classList.add("theme-cyber")
-    } else if (theme === "premium") {
-      root.classList.add("theme-premium")
     } else if (theme === "gov") {
       root.classList.add("theme-gov")
     } else if (theme === "tech") {
       root.classList.add("theme-tech")
-    } else if (theme === "legacy") {
-      root.classList.add("theme-legacy")
-    } else if (theme === "vintage") {
-      root.classList.add("theme-vintage")
     }
     // holographic is the default in :root, so no class needed
 
     localStorage.setItem(storageKey, theme)
-  }, [theme, storageKey])
+  }, [theme, storageKey, mounted])
 
   const value = {
     theme,
