@@ -8,16 +8,8 @@ export async function POST() {
 }
 
 /*
-import { type NextRequest, NextResponse } from "next/server"
-import { generateText } from "ai"
-import { model } from "@/lib/ai/model"
-
-export async function POST(req: NextRequest) {
-  try {
-    const { entityA, entityB, comparisonType } = await req.json()
-
-    if (!entityA || !entityB || !comparisonType) {
-      return NextResponse.json({ error: "Both entities and comparison type required" }, { status: 400 })
+// Disabled - feature not implemented
+*/
     }
 
     const prompt = `Compare these two ${comparisonType}s and provide comprehensive analysis.

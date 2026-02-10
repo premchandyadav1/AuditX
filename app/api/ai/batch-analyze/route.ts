@@ -6,13 +6,6 @@ export async function POST() {
     { status: 503 }
   )
 }
-    }
-
-    const results = []
-
-    for (const doc of documents) {
-      try {
-        const prompt = `Analyze this financial document and extract:
 1. Document type (invoice/receipt/purchase order/contract)
 2. Vendor name and details
 3. Amount and currency

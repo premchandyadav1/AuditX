@@ -6,13 +6,6 @@ export async function POST() {
     { status: 503 }
   )
 }
-
-/*
-import { type NextRequest, NextResponse } from "next/server"
-import { generateText } from "ai"
-import { model } from "@/lib/ai/model"
-
-export async function POST(req: NextRequest) {
   try {
     const { caseData, recipient, tone, purpose } = await req.json()
 

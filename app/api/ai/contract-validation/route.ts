@@ -8,16 +8,8 @@ export async function POST() {
 }
 
 /*
-import { type NextRequest, NextResponse } from "next/server"
-import { generateText } from "ai"
-import { model } from "@/lib/ai/model"
-import { performOCR } from "@/lib/ai/ocr-utils"
-
-export async function POST(req: NextRequest) {
-  try {
-    const formData = await req.formData()
-    const contractFile = formData.get("contract") as File
-    const invoiceFiles = formData.getAll("invoices") as File[]
+// Disabled - feature not implemented
+*/
 
     if (!contractFile || invoiceFiles.length === 0) {
       return NextResponse.json({ error: "Both contract and invoice files are required" }, { status: 400 })
