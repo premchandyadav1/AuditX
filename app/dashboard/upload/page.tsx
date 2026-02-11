@@ -149,11 +149,11 @@ export default function UploadPage() {
         setFiles((prev) => prev.map((f) => (f.id === uploadedFile.id ? { ...f, status: "processing" } : f)))
 
         const formData = new FormData()
-        formData.append("file", uploadedFile.file)
+        uploadedFile.file && formData.append("file", uploadedFile.file)
 
-        console.log("[v0] Sending document to Groq API:", uploadedFile.name)
+        console.log("[v0] Sending document to OCR.space + Gemini API:", uploadedFile.name)
 
-        const response = await fetch("/api/ai/analyze-document", {
+        const response = await fetch("/api/ocr/extract", {
           method: "POST",
           body: formData,
         })
@@ -163,16 +163,22 @@ export default function UploadPage() {
         }
 
         const result = await response.json()
-        console.log("[v0] Groq analysis successful:", result.data)
+        console.log("[v0] OCR + Gemini analysis successful:", result.data)
+
+        // Safely extract data with fallbacks
+        const documentNumber = result.data?.documentDetails?.documentNumber || `DOC-${Date.now()}`
+        const vendorName = result.data?.vendor?.name || "Unknown Vendor"
+        const amount = result.data?.financial?.totalAmount || 0
+        const documentType = result.data?.documentType || "unknown"
 
         const duplicateResponse = await fetch("/api/ocr/duplicate-detection", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            documentNumber: result.data.documentDetails.documentNumber,
-            vendorName: result.data.vendor.name,
-            amount: result.data.financial.totalAmount,
-            documentType: result.data.documentType,
+            documentNumber,
+            vendorName,
+            amount,
+            documentType,
           }),
         })
 
@@ -195,6 +201,10 @@ export default function UploadPage() {
           data: { publicUrl },
         } = supabase.storage.from("documents").getPublicUrl(fileName)
 
+        // Safely determine fiscal year
+        const docDate = result.data?.documentDetails?.date || new Date().toISOString()
+        const fiscalYear = new Date(docDate).getFullYear()
+
         const { data: savedDoc, error: dbError } = await supabase
           .from("documents")
           .insert({
@@ -206,8 +216,8 @@ export default function UploadPage() {
             status: "completed",
             processed_date: new Date().toISOString(),
             extracted_data: result.data,
-            department: result.data.parties?.buyer || "General",
-            fiscal_year: new Date(result.data.documentDetails.date).getFullYear(),
+            department: result.data?.parties?.buyer || "General",
+            fiscal_year: fiscalYear,
           })
           .select()
           .single()
@@ -219,24 +229,28 @@ export default function UploadPage() {
           console.log("[v0] Document saved to database with ID:", savedDoc.id)
         }
 
-        const { data: existingVendor } = await supabase
-          .from("vendors")
-          .select("id")
-          .eq("name", result.data.vendor.name)
-          .single()
+        const vendorNameToCheck = result.data?.vendor?.name || ""
+        
+        const { data: existingVendor } = vendorNameToCheck
+          ? await supabase
+              .from("vendors")
+              .select("id")
+              .eq("name", vendorNameToCheck)
+              .single()
+          : { data: null }
 
         let vendorId = existingVendor?.id
 
-        if (!vendorId && result.data.vendor.name) {
+        if (!vendorId && vendorNameToCheck) {
           const { data: newVendor, error: vendorError } = await supabase
             .from("vendors")
             .insert({
-              name: result.data.vendor.name,
-              tax_id: result.data.vendor.taxId,
-              address: result.data.vendor.address,
-              contact_email: result.data.vendor.contactInfo,
-              category: result.data.documentType,
-              risk_score: result.data.fraudIndicators.riskScore,
+              name: vendorNameToCheck,
+              tax_id: result.data?.vendor?.taxId || "",
+              address: result.data?.vendor?.address || "",
+              contact_email: result.data?.vendor?.contactInfo || "",
+              category: result.data?.documentType || "unknown",
+              risk_score: result.data?.fraudIndicators?.riskScore || 0,
             })
             .select()
             .single()

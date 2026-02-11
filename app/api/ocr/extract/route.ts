@@ -80,10 +80,49 @@ Provide ONLY valid JSON (no markdown, no explanation):
     })
 
     const jsonMatch = text.match(/\{[\s\S]*\}/)
-    const extractedData = jsonMatch ? JSON.parse(jsonMatch[0]) : {
-      documentType: "unknown",
-      fraudIndicators: { riskScore: 0 },
-      confidence: 0,
+    let extractedData
+    
+    if (jsonMatch) {
+      extractedData = JSON.parse(jsonMatch[0])
+    } else {
+      // Complete fallback structure with all required fields
+      extractedData = {
+        documentType: "unknown",
+        vendor: {
+          name: "Unable to extract vendor",
+          address: "",
+          taxId: "",
+          contactInfo: "",
+        },
+        financial: {
+          totalAmount: 0,
+          currency: "INR",
+          taxAmount: 0,
+          subtotal: 0,
+          paymentTerms: "",
+        },
+        documentDetails: {
+          documentNumber: "DOC-" + Date.now(),
+          date: new Date().toISOString().split("T")[0],
+          dueDate: "",
+          referenceNumber: "",
+        },
+        lineItems: [],
+        parties: {
+          buyer: "Unknown",
+          seller: "Unknown",
+          shippingAddress: "",
+        },
+        fraudIndicators: {
+          duplicateRisk: false,
+          priceAnomalyRisk: false,
+          vendorRisk: false,
+          missingFieldsRisk: true,
+          riskScore: 20,
+          riskReasons: ["Unable to extract document details"],
+        },
+        confidence: 10,
+      }
     }
 
     console.log("[v0] Document processed. Risk score:", extractedData?.fraudIndicators?.riskScore)

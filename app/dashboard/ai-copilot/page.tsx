@@ -34,7 +34,7 @@ export default function AICopilotPage() {
     {
       role: "assistant",
       content:
-        "Hello! I'm AuditX AI Copilot powered by Groq Llama 3.3. I can analyze your audit data, detect fraud patterns, assess vendor risks, and answer questions about transactions, compliance, and spending. How can I assist you today?",
+        "Hello! I'm AuditX AI Copilot powered by Gemini 2.5 Flash. I can analyze your audit data, detect fraud patterns, assess vendor risks, and answer questions about transactions, compliance, and spending. How can I assist you today?",
       timestamp: new Date(),
     },
   ])
