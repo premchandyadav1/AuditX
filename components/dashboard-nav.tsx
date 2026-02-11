@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { LayoutDashboard, Upload, AlertTriangle, Receipt, Network, BookCheck, Settings, Search, Bell, FolderOpen, BarChart3, FileBarChart, Newspaper, Sparkles, GitCompare as FileCompare, Layers, FileCheck, HelpCircle, TrendingUp, MapPin, Shield, FileUp, Brain, Layout, FileText, Package, Users, ChevronDown } from "lucide-react"
+import { LayoutDashboard, Upload, AlertTriangle, Receipt, Settings, Search, Bell, Newspaper, Sparkles, Brain, FileText, ChevronDown } from "lucide-react"
 import { ThemeSwitcher } from "@/components/theme-switcher"
 import Image from "next/image"
 import { useState } from "react"
@@ -44,115 +44,41 @@ const navSections: NavSection[] = [
         icon: Search,
       },
       {
-        title: "Vendor Intelligence",
-        href: "/dashboard/vendor-intelligence",
-        icon: Network,
-      },
-      {
         title: "AI Copilot",
         href: "/dashboard/ai-copilot",
         icon: Sparkles,
       },
-
     ],
   },
   {
-    title: "Document Operations",
+    title: "Documents & Data",
     icon: FileText,
     items: [
       {
-        title: "Document Upload",
+        title: "Upload & Extract",
         href: "/dashboard/upload",
         icon: Upload,
-      },
-      {
-        title: "Import Data",
-        href: "/dashboard/import",
-        icon: FileUp,
-      },
-      {
-        title: "OCR Extract",
-        href: "/dashboard/upload",
-        icon: FileCheck,
-      },
-    ],
-  },
-  {
-    title: "Compliance & Risk",
-    icon: Shield,
-    items: [
-      {
-        title: "Policy Compliance",
-        href: "/dashboard/compliance",
-        icon: BookCheck,
-      },
-      {
-        title: "Regulatory Compliance",
-        href: "/dashboard/regulatory-compliance",
-        icon: Shield,
-      },
-      {
-        title: "Fraud & Anomalies",
-        href: "/dashboard/fraud",
-        icon: AlertTriangle,
-      },
-      {
-        title: "Risk Heatmap",
-        href: "/dashboard/heatmap",
-        icon: MapPin,
-      },
-      {
-        title: "Policy Q&A",
-        href: "/dashboard/policy-qa",
-        icon: HelpCircle,
-      },
-    ],
-  },
-  {
-    title: "Analytics & Reporting",
-    icon: BarChart3,
-    items: [
-      {
-        title: "Analytics Dashboard",
-        href: "/dashboard/analytics",
-        icon: BarChart3,
-      },
-      {
-        title: "Reports",
-        href: "/dashboard/reports",
-        icon: FileBarChart,
-      },
-
-    ],
-  },
-  {
-    title: "Workspace",
-    icon: FolderOpen,
-    items: [
-      {
-        title: "Case Management",
-        href: "/dashboard/case-management",
-        icon: FolderOpen,
       },
       {
         title: "Transactions",
         href: "/dashboard/transactions",
         icon: Receipt,
       },
+    ],
+  },
+  {
+    title: "Monitoring",
+    icon: Bell,
+    items: [
       {
         title: "Alerts",
         href: "/dashboard/alerts",
         icon: Bell,
       },
       {
-        title: "Collaboration",
-        href: "/dashboard/collaboration-live",
-        icon: Users,
-      },
-      {
-        title: "Network Graph",
-        href: "/dashboard/network-graph",
-        icon: Network,
+        title: "Fraud Detection",
+        href: "/dashboard/fraud",
+        icon: AlertTriangle,
       },
     ],
   },
@@ -161,7 +87,7 @@ const navSections: NavSection[] = [
     icon: Settings,
     items: [
       {
-        title: "Settings",
+        title: "Preferences",
         href: "/dashboard/settings",
         icon: Settings,
       },
